@@ -2,6 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:note_app/Pr%C3%A9sentation/Home/EditP.dart';
 
 class CardNotes extends StatefulWidget {
   const CardNotes({Key? key}) : super(key: key);
@@ -22,8 +23,10 @@ class _CardNotesState extends State<CardNotes> {
   }
 
   Future<void> fetchData() async {
-    QuerySnapshot querySnapshot =
-        await FirebaseFirestore.instance.collection("folder").where("id",isEqualTo:FirebaseAuth.instance.currentUser!.uid ).get();
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection("folder")
+        .where("id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .get();
     isLoading = false;
     data = querySnapshot.docs;
     setState(() {
@@ -86,7 +89,9 @@ class _CardNotesState extends State<CardNotes> {
                       ],
                     ),
                     trailing: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (_)=> EditFolder(docId:data[i].id ,oldname:data[i]["name"] ,olddesc:data[i]["descrip"] ,)   ));
+                      },
                       icon: const Icon(Icons.edit),
                     ),
                   ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/Pr%C3%A9sentation/Home/EditP.dart';
 import 'package:note_app/Pr%C3%A9sentation/Home/HomeP.dart';
 import 'package:note_app/Pr%C3%A9sentation/Home/NewFolde.dart';
 import 'package:note_app/Pr%C3%A9sentation/Home/SearchP.dart';
@@ -20,6 +21,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => NewFolder());
       case 'search':
         return MaterialPageRoute(builder: (_) => SearchPage());
+    
       default:
         return MaterialPageRoute(builder: (_) => ErrorRoute());
     }
