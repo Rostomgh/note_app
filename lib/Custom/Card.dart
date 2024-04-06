@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -12,6 +13,7 @@ class CardNotes extends StatefulWidget {
 class _CardNotesState extends State<CardNotes> {
   late List<DocumentSnapshot> data = [];
   bool isLoading = true;
+  int dataLength = 0;
 
   @override
   void initState() {
@@ -21,10 +23,12 @@ class _CardNotesState extends State<CardNotes> {
 
   Future<void> fetchData() async {
     QuerySnapshot querySnapshot =
-        await FirebaseFirestore.instance.collection("folder").get();
+        await FirebaseFirestore.instance.collection("folder").where("id",isEqualTo:FirebaseAuth.instance.currentUser!.uid ).get();
     isLoading = false;
     data = querySnapshot.docs;
-    setState(() {});
+    setState(() {
+      dataLength = querySnapshot.docs.length;
+    });
   }
 
   @override

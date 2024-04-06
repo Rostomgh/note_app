@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:note_app/Custom/Constant.dart';
 import 'package:note_app/Custom/CustomButton.dart';
 import 'package:note_app/Custom/CustomDescription.dart';
 import 'package:note_app/Custom/TextFieldCustom.dart';
+import 'package:note_app/Pr%C3%A9sentation/Home/HomeP.dart';
 
 class NewFolder extends StatefulWidget {
   const NewFolder({Key? key}) : super(key: key);
@@ -18,13 +20,28 @@ class _NewFolderState extends State<NewFolder> {
   final TextEditingController newfolder = TextEditingController();
   final CollectionReference folder =
       FirebaseFirestore.instance.collection("folder");
+  bool isloading = false;
 
   addfolder() async {
     if (forms.currentState!.validate()) {
       try {
-        DocumentReference response = await folder.add({'name': newfolder.text,'descrip':description.text});
-        Navigator.of(context).pushReplacementNamed('Home');
+        isloading = true;
+        setState(() {
+          
+        });
+        DocumentReference response = await folder.add({
+          'name': newfolder.text,
+          'descrip': description.text,
+          "id": FirebaseAuth.instance.currentUser!.uid
+        });
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => const HomePage()),
+            (route) => false);
       } catch (e) {
+        isloading = false;
+        setState(() {
+          
+        });
         print("Error $e");
       }
     }

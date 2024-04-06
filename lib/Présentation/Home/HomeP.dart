@@ -4,7 +4,9 @@ import 'package:note_app/Custom/Fhome.dart';
 import 'package:note_app/Custom/Dhome.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  //final int dataLength; // Assuming you have this variable to represent data length
+//required this.dataLength
+  const HomePage({super.key, });
 
   @override
   Widget build(BuildContext context) {
