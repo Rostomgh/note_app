@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:note_app/Pr%C3%A9sentation/auth/Login.dart';
 
@@ -18,9 +19,9 @@ class Dhome extends StatelessWidget {
           ),
           const SizedBox(width: 210),
           IconButton(
-            onPressed: () {
-              Navigator.pushAndRemoveUntil(
-                context,
+            onPressed: () async{
+              await FirebaseAuth.instance.signOut();
+              Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) => const LoginPage()),
                 (route) => false,
               );
