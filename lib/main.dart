@@ -1,11 +1,4 @@
-import 'dart:io';
-
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
-import 'package:note_app/Pr%C3%A9sentation/Home/HomeP.dart';
-import 'package:note_app/Pr%C3%A9sentation/Routes/Ongenerate.dart';
-import 'package:note_app/Pr%C3%A9sentation/auth/Login.dart';
+import 'index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
